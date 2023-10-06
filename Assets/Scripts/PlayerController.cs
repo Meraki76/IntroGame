@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 currentPosition = transform.position;
+        currentPosition = transform.position;
         currentVelocity = (currentPosition - lastPosition) / Time.deltaTime;
         lastPosition = currentPosition;
 
