@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class movePlayer : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+
+    private int numPickUps = 3
+
+    
 
     public Vector2 moveValue;
     public float speed;
@@ -13,6 +17,8 @@ public class movePlayer : MonoBehaviour
     void Start()
     {
         count = 0;
+        winText.text = "";
+        setCountText();
     }
 
     void OnMove(InputValue movementValue)
@@ -30,6 +36,14 @@ public class movePlayer : MonoBehaviour
         if(other.gameObject.tag == "PickUp") {
             count++;
             other.gameObject.SetActive(false);
+            setCountText();
+        }
+    }
+
+    private setCountText() {
+        scoreText.text = "Score: " + count.ToString();
+        if(count >= numPickUps) {
+            winText.text = "You Win!";
         }
     }
 }
