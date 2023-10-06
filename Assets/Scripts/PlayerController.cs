@@ -13,7 +13,13 @@ public class PlayerController : MonoBehaviour
     private int numPickups = 3;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI winText;
+    public TextMeshProUGUI playerPosition;
+    public TextMeshProUGUI playerVelocity;
     public Vector2 moveValue;
+
+    private Vector3 lastPosition;
+    private Vector3 currentVelocity;
+    private Vector3 currentPosition;
 
 
     void Start()
@@ -21,6 +27,7 @@ public class PlayerController : MonoBehaviour
         count = 0;
         winText.text = "";
         SetCountText();
+        lastPosition = transform.position;
     }
 
     void OnMove(InputValue movementValue)
@@ -28,8 +35,18 @@ public class PlayerController : MonoBehaviour
         moveValue = movementValue.Get<Vector2>();
     }
 
+
+    void Update(){
+        playerPosition.text = "Position: " + currentPosition.ToString("0.00");
+        playerVelocity.text = "Velocity: " + currentVelocity.ToString("0.00") + ", Speed: " + currentVelocity.magnitude.ToString("0.00");
+    }
+
     void FixedUpdate()
     {
+        Vector3 currentPosition = transform.position;
+        currentVelocity = (currentPosition - lastPosition) / Time.deltaTime;
+        lastPosition = currentPosition;
+
         Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
         GetComponent<Rigidbody>().AddForce(movement * speed);
     }
