@@ -1418,8 +1418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb44ac32bcbe81e49a4dcc47ac59a241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveValue: {x: 0, y: 0}
   speed: 50
+  scoreText: {fileID: 1290544057}
+  winText: {fileID: 1402820130}
+  moveValue: {x: 0, y: 0}
 --- !u!1 &1891954231
 GameObject:
   m_ObjectHideFlags: 0
