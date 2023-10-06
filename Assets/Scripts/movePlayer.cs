@@ -5,10 +5,15 @@ using UnityEngine.InputSystem;
 
 public class movePlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     public Vector2 moveValue;
-    public float speed ;
+    public float speed;
+    private int count;
+
+    void Start()
+    {
+        count = 0;
+    }
 
     void OnMove(InputValue movementValue)
     {
@@ -19,5 +24,12 @@ public class movePlayer : MonoBehaviour
     {
         Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
         GetComponent<Rigidbody>().AddForce(movement * speed);
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if(other.gameObject.tag == "PickUp") {
+            count++;
+            other.gameObject.SetActive(false);
+        }
     }
 }
